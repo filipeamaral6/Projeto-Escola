@@ -1,0 +1,19 @@
+#navbarLogo {
+  width: 160px;
+}
+
+nav a.nav-link:hover {
+  color: #299be4;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+  color: #299be4;
+}
+
+nav a.dropdown-item:hover {
+  color: #299be4;
+}
+
+nav a.nav-link.dropdown-toogle {
+  color: #299be4;
+}

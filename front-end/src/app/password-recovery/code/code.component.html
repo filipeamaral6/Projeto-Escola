@@ -1,0 +1,53 @@
+<div class="col-md-6 offset-md-3" style="margin-top: 30px;">
+  <app-alert></app-alert>
+  <div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+    <p *ngIf="isTakingAWhile">This may take a while</p>
+  </div>
+  <img
+    src="https://www.polarising.com/site/wp-content/uploads/2018/11/Polarising_Logo_FullColor_112018-1.png"
+    alt="recoverLogo"
+    class="img-fluid rounded mx-auto d-block"
+  />
+  <hr />
+  <h3>Password reset code</h3>
+  <br />
+  <form [formGroup]="codeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        formControlName="username"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+      />
+      <div *ngIf="submitted && !!f.username.errors" class="invalid-feedback">
+        <div *ngIf="!!f.username.errors.required">Username is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="code">Code</label>
+      <input
+        type="text"
+        formControlName="code"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+      />
+      <div *ngIf="submitted && !!f.code.errors" class="invalid-feedback">
+        <div *ngIf="!!f.code.errors.required">Code is required</div>
+        <div *ngIf="!!f.code.errors.minlength">
+          Code needs to be at least 8 characters long
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button
+        [disabled]="isLoading"
+        class="btn btn-primary"
+        style="margin-right: 10px;"
+      >
+        Reset password
+      </button>
+    </div>
+  </form>
+</div>

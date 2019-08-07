@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>DatabaseURL</name>
+			<value>jdbc:mysql://localhost:3306/intranet</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562341725976</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Password</name>
+			<value>#!nKb8POAPHB8oR3rHyeV9XyClo49Xoh/P9W9+5ubCnrs=</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Password</type>
+			<modTime>1562341726009</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>User</name>
+			<value>root</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1562341725995</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

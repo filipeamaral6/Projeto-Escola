@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns5="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" xmlns:tns="http://xmlns.example.com/1561453715358" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:ns4="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" targetNamespace="http://xmlns.example.com/1561453715358" name="ProjetoEscola">
+    <import namespace="http://ws-i.org/profiles/basic/1.1/xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" location="../Schemas/IdOnly.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" location="../Schemas/Employee.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" location="../Schemas/UsernameOnly.xsd"/>
+    <message name="AddEmployeeInput">
+        <part name="input" element="ns:InputData"/>
+    </message>
+    <message name="AddEmployeeOutput">
+        <part name="output" element="ns:OutputData"/>
+    </message>
+    <message name="GetEmployeesInput"/>
+    <message name="GetEmployeesOutput">
+        <part name="output" element="ns:root"/>
+    </message>
+    <message name="DeleteEmployeeInput">
+        <part name="input" element="ns4:InputData"/>
+    </message>
+    <message name="DeleteEmployeeOutput">
+        <part name="output" element="ns:OutputData"/>
+    </message>
+    <message name="GetEmployeeByIdInput">
+        <part name="input" element="ns4:InputData"/>
+    </message>
+    <message name="GetEmployeeByIdOutput">
+        <part name="output" element="ns:root"/>
+    </message>
+    <message name="UpdateEmployeeInput">
+        <part name="input" element="ns:InputData"/>
+    </message>
+    <message name="UpdateEmployeeOutput">
+        <part name="output" element="ns:OutputData"/>
+    </message>
+    <message name="GetEmployeeByUsernameInput">
+        <part name="input" element="ns5:root"/>
+    </message>
+    <message name="GetEmployeeByUsernameOutput">
+        <part name="output" element="ns:root"/>
+    </message>
+    <message name="GetActiveEmployeesInput"/>
+    <message name="GetActiveEmployeesOutput">
+        <part name="output" element="ns:root"/>
+    </message>
+    <portType name="AddEmployeePortType">
+        <operation name="AddEmployee">
+            <input message="tns:AddEmployeeInput"/>
+            <output message="tns:AddEmployeeOutput"/>
+        </operation>
+    </portType>
+    <portType name="GetEmployeesPortType">
+        <operation name="GetEmployees">
+            <input message="tns:GetEmployeesInput"/>
+            <output message="tns:GetEmployeesOutput"/>
+        </operation>
+    </portType>
+    <portType name="DeleteEmployeePortType">
+        <operation name="DeleteEmployee">
+            <input message="tns:DeleteEmployeeInput"/>
+            <output message="tns:DeleteEmployeeOutput"/>
+        </operation>
+    </portType>
+    <portType name="GetEmployeeByIdPortType">
+        <operation name="GetEmployeeById">
+            <input message="tns:GetEmployeeByIdInput"/>
+            <output message="tns:GetEmployeeByIdOutput"/>
+        </operation>
+    </portType>
+    <portType name="UpdateEmployeePortType">
+        <operation name="UpdateEmployee">
+            <input message="tns:UpdateEmployeeInput"/>
+            <output message="tns:UpdateEmployeeOutput"/>
+        </operation>
+    </portType>
+    <portType name="GetEmployeeByUsernamePortType">
+        <operation name="GetEmployeeByUsername">
+            <input message="tns:GetEmployeeByUsernameInput"/>
+            <output message="tns:GetEmployeeByUsernameOutput"/>
+        </operation>
+    </portType>
+    <portType name="GetActiveEmployeesPorType">
+        <operation name="GetActiveEmployees">
+            <input message="tns:GetActiveEmployeesInput"/>
+            <output message="tns:GetActiveEmployeesOutput"/>
+        </operation>
+    </portType>
+</definitions>

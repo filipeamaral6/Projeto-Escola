@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1561453715358" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://xmlns.example.com/1562168510682" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Platforms.xsd">
+    <wsdl:import namespace="http://xmlns.example.com/1561453715358" location="/Employee Service/WSDL.wsdl"/>
+    <wsdl:import namespace="http://xmlns.example.com/1562168510682" location="/Platform Service/WSDL.wsdl"/>
+    <pd:name>Platform Service/Get Platforms By Id/GetPlatformsById.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx2:GetPlatformsByIdInput"/>
+    <pd:startX>102</pd:startX>
+    <pd:startY>184</pd:startY>
+    <pd:returnBindings>
+        <pfx2:GetPlatformsByIdOutput>
+            <output>
+                <ns3:InputData>
+                    <xsl:attribute name="id">
+                        <xsl:value-of select="$Start/pfx2:GetPlatformsByIdInput/input/ns:InputData/@id"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="intranet">
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/INTRANET"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="slack">
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/SLACK"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="office365">
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/OFFICE_365"/>
+                    </xsl:attribute>
+                </ns3:InputData>
+            </output>
+        </pfx2:GetPlatformsByIdOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx2:GetPlatformsByIdOutput"/>
+    <pd:endX>705</pd:endX>
+    <pd:endY>187</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1561565751878</pd:targetNamespace>
+    <pd:activity name="JDBC Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>397</pd:x>
+        <pd:y>186</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Database/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT INTRANET, SLACK, OFFICE_365 FROM EMPLOYEES WHERE ID = (?)</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>ID</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>INTRANET</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>SLACK</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-6</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>OFFICE_365</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <ID>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx2:GetPlatformsByIdInput/input/ns:InputData/@id)">
+                            <xsl:value-of select="$Start/pfx2:GetPlatformsByIdInput/input/ns:InputData/@id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </ID>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Query</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Query</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

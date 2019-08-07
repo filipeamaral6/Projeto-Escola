@@ -1,0 +1,9 @@
+#btnReturn {
+  text-align: right;
+}
+
+#btnReturn i {
+  font-size: 26px;
+  padding: 4px;
+  color: rgb(95, 95, 95);
+}

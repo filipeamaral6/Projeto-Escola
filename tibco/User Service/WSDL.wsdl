@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns6="http://www.tibco.com/schemas/tibco/Schemas/IdAndToken.xsd3" xmlns:ns5="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd3" xmlns:ns7="http://www.tibco.com/schemas/tibco/Schemas/UsernameAndToken.xsd3" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/User.xsd" xmlns:tns="http://xmlns.example.com/1561632387170" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:ns4="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" targetNamespace="http://xmlns.example.com/1561632387170">
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" location="../Schemas/Employee.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" location="../Schemas/UsernameOnly.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" location="../Schemas/IdOnly.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/UsernameAndToken.xsd3" location="../Schemas/UsernameAndToken.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd3" location="../Schemas/UsernameAndCode.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/User.xsd" location="../Schemas/User.xsd"/>
+    <message name="GetUsersInput"/>
+    <message name="GetUsersOutput">
+        <part name="output" element="ns:root"/>
+    </message>
+    <message name="AddUserInput">
+        <part name="input" element="ns:InputData"/>
+    </message>
+    <message name="AddUserOutput">
+        <part name="output" element="ns:OutputData"/>
+    </message>
+    <message name="DeleteUserInput">
+        <part name="input" element="ns2:InputData"/>
+    </message>
+    <message name="DeleteUserOutput">
+        <part name="output" element="ns:OutputData"/>
+    </message>
+    <message name="GetUserByIdInput">
+        <part name="input" element="ns2:InputData"/>
+    </message>
+    <message name="GetUserByIdOutput">
+        <part name="output" element="ns:root"/>
+    </message>
+    <message name="UpdateUserInput">
+        <part name="input" element="ns:InputData"/>
+    </message>
+    <message name="UpdateUserOutput">
+        <part name="output" element="ns:OutputData"/>
+    </message>
+    <message name="GetUserByUsernameInput">
+        <part name="input" element="ns4:InputData"/>
+    </message>
+    <message name="GetUserByUsernameOutput">
+        <part name="output" element="ns:root"/>
+    </message>
+    <message name="UpdatePasswordRecoveryCodeInput">
+        <part name="input" element="ns5:InputData"/>
+    </message>
+    <message name="UpdatePasswordRecoveryCodeOutput">
+        <part name="output" element="ns:OutputData"/>
+    </message>
+    <portType name="GetUsersPortType">
+        <operation name="GetUsers">
+            <input message="tns:GetUsersInput"/>
+            <output message="tns:GetUsersOutput"/>
+        </operation>
+    </portType>
+    <portType name="AddUserPortType">
+        <operation name="AddUser">
+            <input message="tns:AddUserInput"/>
+            <output message="tns:AddUserOutput"/>
+        </operation>
+    </portType>
+    <portType name="DeleteUserPortType">
+        <operation name="DeleteUser">
+            <input message="tns:DeleteUserInput"/>
+            <output message="tns:DeleteUserOutput"/>
+        </operation>
+    </portType>
+    <portType name="GetUserByIdPortType">
+        <operation name="GetUserById">
+            <input message="tns:GetUserByIdInput"/>
+            <output message="tns:GetUserByIdOutput"/>
+        </operation>
+    </portType>
+    <portType name="UpdateUserPortType">
+        <operation name="UpdateUser">
+            <input message="tns:UpdateUserInput"/>
+            <output message="tns:UpdateUserOutput"/>
+        </operation>
+    </portType>
+    <portType name="GetUserByUsernamePortType">
+        <operation name="GetUserByUsername">
+            <input message="tns:GetUserByUsernameInput"/>
+            <output message="tns:GetUserByUsernameOutput"/>
+        </operation>
+    </portType>
+    <portType name="UpdatePasswordRecoveryCode">
+        <operation name="UpdatePasswordRecoveryCode">
+            <input message="tns:UpdatePasswordRecoveryCodeInput"/>
+            <output message="tns:UpdatePasswordRecoveryCodeOutput"/>
+        </operation>
+    </portType>
+</definitions>

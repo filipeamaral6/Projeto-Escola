@@ -1,0 +1,178 @@
+<div class="col-md-6 offset-md-3">
+  <div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <app-alert></app-alert>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Edit User</h4>
+    </div>
+
+    <div class="col-md-6" id="btnReturn">
+      <a
+        id="return"
+        title="Return"
+        data-toggle="tooltip"
+        [routerLink]="['/users/detail', user.id]"
+        style="cursor: pointer;"
+      >
+        <i class="material-icons">arrow_back</i>
+      </a>
+    </div>
+  </div>
+  <hr />
+  <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        formControlName="firstName"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+      />
+      <div *ngIf="submitted && !!f.firstName.errors" class="invalid-feedback">
+        <div *ngIf="!!f.firstName.errors.required">First name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        formControlName="lastName"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+      />
+      <div *ngIf="submitted && !!f.lastName.errors" class="invalid-feedback">
+        <div *ngIf="!!f.lastName.errors.required">Last name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="personalEmail">Personal email</label>
+      <input
+        type="text"
+        formControlName="personalEmail"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.personalEmail.errors }"
+      />
+      <div
+        *ngIf="submitted && !!f.personalEmail.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="!!f.personalEmail.errors.required">
+          Personal email is required
+        </div>
+        <div *ngIf="!!f.personalEmail.errors.email">
+          Please enter a valid email address
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Company email</label>
+      <input
+        type="text"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+      />
+      <div *ngIf="submitted && !!f.email.errors" class="invalid-feedback">
+        <div *ngIf="!!f.lastName.errors.required">Email is required</div>
+        <div *ngIf="!!f.lastName.errors.required">
+          Please enter a valid email address
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Username</label>
+      <input
+        type="text"
+        formControlName="username"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+      />
+      <div *ngIf="submitted && !!f.username.errors" class="invalid-feedback">
+        <div *ngIf="!!f.username.errors.required">Username is required</div>
+      </div>
+    </div>
+    <p style="margin-top: 12px; margin-bottom: 12px;">
+      Reset password
+    </p>
+    <div class="custom-control custom-radio">
+      <input
+        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+        type="radio"
+        formControlName="password"
+        id="isResetFalse"
+        class="custom-control-input"
+        value="resetFalse"
+        checked
+      />
+      <label class="custom-control-label" for="isResetFalse">No</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <input
+        type="radio"
+        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+        formControlName="password"
+        id="isResetTrue"
+        class="custom-control-input"
+        value="resetTrue"
+      />
+      <label class="custom-control-label" for="isResetTrue">Yes</label>
+    </div>
+    <div *ngIf="submitted && !!f.password.errors" class="invalid-feedback">
+      <div *ngIf="!!f.role.password.required">Role is required</div>
+    </div>
+    <p style="margin-top: 12px; margin-bottom: 12px;">
+      Administrator
+    </p>
+    <div class="custom-control custom-radio">
+      <input
+        [ngClass]="{ 'is-invalid': submitted && f.role.errors }"
+        type="radio"
+        formControlName="role"
+        id="isAdminFalse"
+        class="custom-control-input"
+        value="ROLE_USER"
+        checked
+      />
+      <label class="custom-control-label" for="isAdminFalse">No</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <input
+        type="radio"
+        [ngClass]="{ 'is-invalid': submitted && f.role.errors }"
+        formControlName="role"
+        id="isAdminTrue"
+        class="custom-control-input"
+        value="ROLE_ADMIN"
+      />
+      <label class="custom-control-label" for="isAdminTrue">Yes</label>
+    </div>
+    <div *ngIf="submitted && !!f.role.errors" class="invalid-feedback">
+      <div *ngIf="!!f.role.errors.required">Role is required</div>
+    </div>
+    <hr />
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" style="margin-right: 5px;" *ngIf="isLoading === true" disabled>
+        Save
+      </button>
+      <button class="btn btn-primary" type="submit" style="margin-right: 5px;" *ngIf="isLoading === false">
+        Save
+      </button>
+      <button
+        class="btn btn-secondary"
+        style="margin-right: 5px;"
+        type="button"
+        (click)="onClear()"
+      >
+        Clear
+      </button>
+      <button class="btn btn-success" type="button" (click)="onReset()">
+        Reset
+      </button>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">
+      An unknown error has occurred
+    </div>
+  </form>
+</div>

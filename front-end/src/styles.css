@@ -1,0 +1,16 @@
+.myPagination .ngx-pagination .current {
+  background-color: #299be4 !important;
+}
+
+.myPagination .ngx-pagination li {
+  border-radius: 2px;
+}
+
+.myPagination .ngx-pagination a:hover {
+  color: #566787;
+  background: #f2f2f2;
+}
+
+.pagination {
+  float: right;
+}

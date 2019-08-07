@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1561632387170" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/User.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd">
+    <wsdl:import namespace="http://xmlns.example.com/1561632387170" location="/User Service/WSDL.wsdl"/>
+    <pd:name>User Service/Get User By Username/GetUserByUsername.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:GetUserByUsernameInput"/>
+    <pd:startX>132</pd:startX>
+    <pd:startY>106</pd:startY>
+    <pd:returnBindings>
+        <pfx:GetUserByUsernameOutput>
+            <output>
+                <ns2:root>
+                    <xsl:for-each select="$Select-User-by-Username/resultSet/Record">
+                        <ns2:InputData>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="ID"/>
+                            </xsl:attribute>
+                            <xsl:if test="EMAIL">
+                                <xsl:attribute name="email">
+                                    <xsl:value-of select="EMAIL"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="FIRST_NAME">
+                                <xsl:attribute name="firstName">
+                                    <xsl:value-of select="FIRST_NAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="LAST_NAME">
+                                <xsl:attribute name="lastName">
+                                    <xsl:value-of select="LAST_NAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="PASSWORD">
+                                <xsl:attribute name="password">
+                                    <xsl:value-of select="PASSWORD"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="USERNAME">
+                                <xsl:attribute name="username">
+                                    <xsl:value-of select="USERNAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="PERSONAL_EMAIL">
+                                <xsl:attribute name="personalEmail">
+                                    <xsl:value-of select="PERSONAL_EMAIL"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:attribute name="createdAt">
+                                <xsl:value-of select="CREATED_AT"/>
+                            </xsl:attribute>
+                            <xsl:if test="ROLE_NAME">
+                                <xsl:attribute name="role">
+                                    <xsl:value-of select="ROLE_NAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="PASSWORD_RECOVERY_CODE">
+                                <xsl:attribute name="passwordRecoveryCode">
+                                    <xsl:value-of select="PASSWORD_RECOVERY_CODE"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </ns2:InputData>
+                    </xsl:for-each>
+                    <ns2:OutputData>
+                        <xsl:choose>
+                            <xsl:when test="not(exists($Select-User-by-Username/resultSet/Record))">
+                                <xsl:attribute name="message">
+                                    <xsl:value-of select="&quot;Error: User not found&quot;"/>
+                                </xsl:attribute>
+                            </xsl:when>
+                        </xsl:choose>
+                    </ns2:OutputData>
+                </ns2:root>
+            </output>
+        </pfx:GetUserByUsernameOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:GetUserByUsernameOutput"/>
+    <pd:endX>510</pd:endX>
+    <pd:endY>108</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1561645166259</pd:targetNamespace>
+    <pd:activity name="Select User by Username">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>320</pd:x>
+        <pd:y>115</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Database/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT a.*, b.ROLE_NAME FROM USERS a, ROLES b, USER_ROLES c WHERE a.USERNAME = ? AND a.ID = c.USER_ID AND b.ID = c.ROLE_ID;</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>USERNAME</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ID</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>FIRST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>LAST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PASSWORD</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>USERNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>CREATED_AT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PERSONAL_EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PASSWORD_RECOVERY_CODE</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>ROLE_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <USERNAME>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:GetUserByUsernameInput/input/ns:InputData/@username)">
+                            <xsl:value-of select="$Start/pfx:GetUserByUsernameInput/input/ns:InputData/@username"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </USERNAME>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Select User by Username</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Select User by Username</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

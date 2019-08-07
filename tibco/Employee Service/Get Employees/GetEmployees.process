@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://xmlns.example.com/1561453715358" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" schemaLocation="/Schemas/Employee.xsd"/>
+    <wsdl:import namespace="http://xmlns.example.com/1561453715358" location="/Employee Service/WSDL.wsdl"/>
+    <pd:name>Employee Service/Get Employees/GetEmployees.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx2:GetEmployeesInput"/>
+    <pd:startX>155</pd:startX>
+    <pd:startY>151</pd:startY>
+    <pd:returnBindings>
+        <pfx2:GetEmployeesOutput>
+            <output>
+                <pfx:root>
+                    <xsl:for-each select="$JDBC-Query/resultSet/Record">
+                        <pfx:InputData>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="ID"/>
+                            </xsl:attribute>
+                            <xsl:if test="EMAIL">
+                                <xsl:attribute name="email">
+                                    <xsl:value-of select="EMAIL"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="FIRST_NAME">
+                                <xsl:attribute name="firstName">
+                                    <xsl:value-of select="FIRST_NAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="LAST_NAME">
+                                <xsl:attribute name="lastName">
+                                    <xsl:value-of select="LAST_NAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="USERNAME">
+                                <xsl:attribute name="username">
+                                    <xsl:value-of select="USERNAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="PERSONAL_EMAIL">
+                                <xsl:attribute name="personalEmail">
+                                    <xsl:value-of select="PERSONAL_EMAIL"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:attribute name="createdAt">
+                                <xsl:value-of select="CREATED_AT"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="intranet">
+                                <xsl:value-of select="INTRANET"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="slack">
+                                <xsl:value-of select="SLACK"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="office365">
+                                <xsl:value-of select="OFFICE_365"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="startedAt">
+                                <xsl:value-of select="STARTED_AT"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="status">
+                                <xsl:value-of select="STATUS"/>
+                            </xsl:attribute>
+                        </pfx:InputData>
+                    </xsl:for-each>
+                    <pfx:OutputData>
+                        <xsl:choose>
+                            <xsl:when test="not(exists($JDBC-Query/resultSet/Record))">
+                                <xsl:attribute name="message">
+                                    <xsl:value-of select="&quot;Error: Employees not found&quot;"/>
+                                </xsl:attribute>
+                            </xsl:when>
+                        </xsl:choose>
+                    </pfx:OutputData>
+                </pfx:root>
+            </output>
+        </pfx2:GetEmployeesOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx2:GetEmployeesOutput"/>
+    <pd:endX>798</pd:endX>
+    <pd:endY>142</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1561462130993</pd:targetNamespace>
+    <pd:activity name="JDBC Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>483</pd:x>
+        <pd:y>154</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <statement>SELECT * FROM EMPLOYEES</statement>
+            <jdbcSharedConfig>/Database/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ID</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>FIRST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>LAST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>USERNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>INTRANET</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>SLACK</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-6</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>OFFICE_365</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>CREATED_AT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PERSONAL_EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STARTED_AT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STATUS</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Query</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Query</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

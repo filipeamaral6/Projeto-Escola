@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>Office365LicenseId</name>
+			<value>189a915c-fe4f-4ffa-bde4-85b9628d07a0</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1563207345956</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>SlackSendInviteTime</name>
+			<value>180000</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1563965816001</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>SlackToken</name>
+			<value>xoxp-688446995171-699370413524-699370697268-e7d4050447222238176f473f75e6edc8</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1563963662424</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

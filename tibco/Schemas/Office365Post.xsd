@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2"
+	 targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="passwordProfile"/>
+			</xs:sequence>
+			<xs:attribute name="accountEnabled" type="xs:boolean"/>
+			<xs:attribute name="displayName" type="xs:string"/>
+			<xs:attribute name="mailNickname" type="xs:string"/>
+			<xs:attribute name="userPrincipalName" type="xs:string"/>
+			<xs:attribute name="usageLocation" type="xs:string"/>
+			<xs:attribute name="passwordPolicies" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="passwordProfile">
+		<xs:complexType>
+			<xs:attribute name="forceChangePasswordNextSignIn" type="xs:boolean"/>
+			<xs:attribute name="password" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

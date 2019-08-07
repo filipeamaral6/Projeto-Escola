@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Repository:repository xmlns:Repository="http://www.tibco.com/xmlns/repo/types/2002">
+    <enterpriseArchive>
+        <sharedArchive name="Shared Archive">
+            <resourceType>shared.archive.resource</resourceType>
+            <authorProperty>filipe.amaral</authorProperty>
+        </sharedArchive>
+        <processArchive name="Process Archive">
+            <resourceType>process.archive.resource</resourceType>
+            <authorProperty>filipe.amaral</authorProperty>
+            <processProperty>/Employee Service/Employee Service.serviceagent,/Platform Service/Platform Service.serviceagent,/User Service/User Service.serviceagent</processProperty>
+        </processArchive>
+        <versionProperty>7</versionProperty>
+        <authorProperty>filipe.amaral</authorProperty>
+        <addServiceSettableGvars>true</addServiceSettableGvars>
+        <name>Employee Manager</name>
+        <designer>
+            <lockedProperties/>
+            <fixedChildren/>
+            <resourceDescriptions/>
+        </designer>
+        <fileLocationProperty>C:\Users\filipe.amaral\OneDrive - P8G Group, Lda\ProjetoEscolaPolarising\tibco\employeeManager.ear</fileLocationProperty>
+    </enterpriseArchive>
+</Repository:repository>

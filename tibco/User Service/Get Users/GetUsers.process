@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1561632387170" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/User.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:import namespace="http://xmlns.example.com/1561632387170" location="/User Service/WSDL.wsdl"/>
+    <pd:name>User Service/Get Users/GetUsers.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:GetUsersInput"/>
+    <pd:startX>101</pd:startX>
+    <pd:startY>107</pd:startY>
+    <pd:returnBindings>
+        <pfx:GetUsersOutput>
+            <output>
+                <ns:root>
+                    <xsl:for-each select="$JDBC-Query/resultSet/Record">
+                        <ns:InputData>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="ID"/>
+                            </xsl:attribute>
+                            <xsl:if test="EMAIL">
+                                <xsl:attribute name="email">
+                                    <xsl:value-of select="EMAIL"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="FIRST_NAME">
+                                <xsl:attribute name="firstName">
+                                    <xsl:value-of select="FIRST_NAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="LAST_NAME">
+                                <xsl:attribute name="lastName">
+                                    <xsl:value-of select="LAST_NAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="PASSWORD">
+                                <xsl:attribute name="password">
+                                    <xsl:value-of select="PASSWORD"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="USERNAME">
+                                <xsl:attribute name="username">
+                                    <xsl:value-of select="USERNAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="ROLE_NAME">
+                                <xsl:attribute name="role">
+                                    <xsl:value-of select="ROLE_NAME"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="PERSONAL_EMAIL">
+                                <xsl:attribute name="personalEmail">
+                                    <xsl:value-of select="PERSONAL_EMAIL"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:attribute name="createdAt">
+                                <xsl:value-of select="CREATED_AT"/>
+                            </xsl:attribute>
+                            <xsl:if test="PASSWORD_RECOVERY_CODE">
+                                <xsl:attribute name="passwordRecoveryCode">
+                                    <xsl:value-of select="PASSWORD_RECOVERY_CODE"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </ns:InputData>
+                    </xsl:for-each>
+                    <ns:OutputData>
+                        <xsl:choose>
+                            <xsl:when test="not(exists($JDBC-Query/resultSet/Record))">
+                                <xsl:attribute name="message">
+                                    <xsl:value-of select="&quot;Error: Users not found&quot;"/>
+                                </xsl:attribute>
+                            </xsl:when>
+                        </xsl:choose>
+                    </ns:OutputData>
+                </ns:root>
+            </output>
+        </pfx:GetUsersOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:GetUsersOutput"/>
+    <pd:endX>477</pd:endX>
+    <pd:endY>106</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1561631118542</pd:targetNamespace>
+    <pd:activity name="JDBC Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>288</pd:x>
+        <pd:y>111</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <statement>SELECT a.*, b.ROLE_NAME FROM USERS a, ROLES b, USER_ROLES c WHERE a.ID = c.USER_ID AND b.ID = c.ROLE_ID;</statement>
+            <jdbcSharedConfig>/Database/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ID</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>FIRST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>LAST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PASSWORD</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>USERNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>CREATED_AT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PERSONAL_EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PASSWORD_RECOVERY_CODE</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>ROLE_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Query</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Query</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

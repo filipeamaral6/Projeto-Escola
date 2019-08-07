@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1561453715358" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://xmlns.example.com/1561632387170" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" xmlns:pfx3="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:ns1="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/User.xsd">
+    <wsdl:import namespace="http://xmlns.example.com/1561453715358" location="/Employee Service/WSDL.wsdl"/>
+    <pd:name>Employee Service/Delete Employee/DeleteEmployees.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:DeleteEmployeeInput"/>
+    <pd:startX>130</pd:startX>
+    <pd:startY>212</pd:startY>
+    <pd:returnBindings>
+        <pfx:DeleteEmployeeOutput>
+            <output>
+                <ns:OutputData>
+                    <xsl:choose>
+                        <xsl:when test="$UpdateEmployee/pfx:UpdateEmployeeOutput/output/ns:OutputData/@message = &quot;Employee updated successfully&quot;">
+                            <xsl:attribute name="message">
+                                <xsl:value-of select="&quot;Employee was deleted successfully&quot;"/>
+                            </xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="message">
+                                <xsl:value-of select="&quot;Error: Employee not found&quot;"/>
+                            </xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </ns:OutputData>
+            </output>
+        </pfx:DeleteEmployeeOutput>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:DeleteEmployeeOutput"/>
+    <pd:endX>775</pd:endX>
+    <pd:endY>209</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1561462172225</pd:targetNamespace>
+    <pd:activity name="Get Employee">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>377</pd:x>
+        <pd:y>211</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Database/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM EMPLOYEES WHERE ID = (?)</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>ID</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ID</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>FIRST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>LAST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>USERNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>INTRANET</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>SLACK</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-6</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>OFFICE_365</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>CREATED_AT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PERSONAL_EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STARTED_AT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STATUS</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <ID>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:DeleteEmployeeInput/input/ns2:InputData/@id)">
+                            <xsl:value-of select="$Start/pfx:DeleteEmployeeInput/input/ns2:InputData/@id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </ID>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get User By Username">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>565</pd:x>
+        <pd:y>61</pd:y>
+        <config>
+            <processName>/User Service/Get User By Username/GetUserByUsername.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx2:GetUserByUsernameInput>
+                <input>
+                    <pfx3:InputData>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/USERNAME">
+                            <xsl:attribute name="username">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/USERNAME"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                    </pfx3:InputData>
+                </input>
+            </pfx2:GetUserByUsernameInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Delete User">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>773</pd:x>
+        <pd:y>53</pd:y>
+        <config>
+            <processName>/User Service/Delete User/DeleteUser.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx2:DeleteUserInput>
+                <input>
+                    <ns2:InputData>
+                        <xsl:if test="$Get-User-By-Username/pfx2:GetUserByUsernameOutput/output/ns3:root/ns3:InputData[1]/@id">
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="$Get-User-By-Username/pfx2:GetUserByUsernameOutput/output/ns3:root/ns3:InputData[1]/@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                    </ns2:InputData>
+                </input>
+            </pfx2:DeleteUserInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="UpdateEmployee">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>376</pd:x>
+        <pd:y>52</pd:y>
+        <config>
+            <processName>/Employee Service/Update Employee/UpdateEmployee.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx:UpdateEmployeeInput>
+                <input>
+                    <ns:InputData>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/ID">
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/ID"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/EMAIL">
+                            <xsl:attribute name="email">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/EMAIL"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/FIRST_NAME">
+                            <xsl:attribute name="firstName">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/FIRST_NAME"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/LAST_NAME">
+                            <xsl:attribute name="lastName">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/LAST_NAME"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/USERNAME">
+                            <xsl:attribute name="username">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/USERNAME"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test="$Get-Employee/resultSet/Record[1]/INTRANET = &quot;true&quot;">
+                                <xsl:attribute name="intranet">
+                                    <xsl:value-of select="1"/>
+                                </xsl:attribute>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="intranet">
+                                    <xsl:value-of select="0"/>
+                                </xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/SLACK">
+                            <xsl:attribute name="slack">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/SLACK"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:attribute name="office365">
+                            <xsl:value-of select="&quot;0&quot;"/>
+                        </xsl:attribute>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/STARTED_AT">
+                            <xsl:attribute name="startedAt">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/STARTED_AT"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:attribute name="status">
+                            <xsl:value-of select="&quot;INACTIVE&quot;"/>
+                        </xsl:attribute>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/PERSONAL_EMAIL">
+                            <xsl:attribute name="personalEmail">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/PERSONAL_EMAIL"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="$Get-Employee/resultSet/Record[1]/CREATED_AT">
+                            <xsl:attribute name="createdAt">
+                                <xsl:value-of select="$Get-Employee/resultSet/Record[1]/CREATED_AT"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                    </ns:InputData>
+                </input>
+            </pfx:UpdateEmployeeInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get Employee</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Employee</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get User By Username</pd:from>
+        <pd:to>Delete User</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Delete User</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>UpdateEmployee</pd:from>
+        <pd:to>Get User By Username</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Employee</pd:from>
+        <pd:to>UpdateEmployee</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>UpdateEmployee</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>error</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

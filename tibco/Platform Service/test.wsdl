@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1562168518755" xmlns:ns0="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/Office365.xsd2" xmlns:ns1="http://www.tibco.com/schemas/tibco/Schemas/Platforms.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" name="Untitled" targetNamespace="http://xmlns.example.com/1562168518755">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/Platforms.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/Platforms.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="InputData">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="intranet" type="xs:string"/>
+                    <xs:attribute name="office365" type="xs:string"/>
+                    <xs:attribute name="slack" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OutputData">
+                <xs:complexType>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:InputData" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="ns1:OutputData" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="InputData">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:InputData" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="InputData">
+                <xs:complexType>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="firstName" type="xs:string"/>
+                    <xs:attribute name="lastName" type="xs:string"/>
+                    <xs:attribute name="startDate" type="xs:string"/>
+                    <xs:attribute name="username" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OutputData">
+                <xs:complexType>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:InputData" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="ns3:OutputData" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/Office365.xsd2" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/Office365.xsd2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="InputData">
+                <xs:complexType>
+                    <xs:attribute name="displayName" type="xs:string"/>
+                    <xs:attribute name="mailNickname" type="xs:string"/>
+                    <xs:attribute name="password" type="xs:string"/>
+                    <xs:attribute name="token" type="xs:string"/>
+                    <xs:attribute name="userPrincipalName" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OutputData">
+                <xs:complexType>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:InputData" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="ns2:OutputData" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Platform Service">
+        <wsdl:port name="SlackInvitePortTypeEndpoint1" binding="tns:SlackInvitePortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8092/platform/slack/invite"/>
+        </wsdl:port>
+        <wsdl:port name="Office365PortTypeEndpoint1" binding="tns:Office365PortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8092/office365/invite"/>
+        </wsdl:port>
+        <wsdl:port name="IntranetPortTypeEndpoint1" binding="tns:IntranetPortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8092/intranet/add"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="SlackInvitePortType">
+        <wsdl:operation name="SlackInvite">
+            <wsdl:input message="tns:SlackInviteInput"/>
+            <wsdl:output message="tns:SlackInviteOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="Office365PortType">
+        <wsdl:operation name="Office365">
+            <wsdl:input message="tns:Office365Input"/>
+            <wsdl:output message="tns:Office365Output"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="IntranetPortType">
+        <wsdl:operation name="Intranet">
+            <wsdl:input message="tns:IntranetInput"/>
+            <wsdl:output message="tns:IntranetOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SlackInvitePortTypeEndpoint1Binding" type="tns:SlackInvitePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="SlackInvite">
+            <soap:operation style="document" soapAction="/SlackInviteSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="Office365PortTypeEndpoint1Binding" type="tns:Office365PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Office365">
+            <soap:operation style="document" soapAction="/Office365InviteSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="IntranetPortTypeEndpoint1Binding" type="tns:IntranetPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Intranet">
+            <soap:operation style="document" soapAction="/IntranetAddSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="SlackInviteInput">
+        <wsdl:part name="input" element="ns0:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="SlackInviteOutput">
+        <wsdl:part name="output" element="ns1:OutputData"/>
+    </wsdl:message>
+    <wsdl:message name="Office365Input">
+        <wsdl:part name="input" element="ns2:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="Office365Output">
+        <wsdl:part name="output" element="ns2:OutputData"/>
+    </wsdl:message>
+    <wsdl:message name="IntranetInput">
+        <wsdl:part name="input" element="ns3:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="IntranetOutput">
+        <wsdl:part name="output" element="ns3:OutputData"/>
+    </wsdl:message>
+</wsdl:definitions>

@@ -1,0 +1,91 @@
+#new-employee {
+  background-color: #299be4;
+  color: white;
+}
+
+#new-employee:hover,
+:focus {
+  color: #566787;
+  background: #f2f2f2;
+}
+
+#export-csv {
+  color: white;
+}
+
+#export-csv:hover,
+:focus {
+  color: #566787;
+  background: #f2f2f2;
+}
+
+.searchIcon {
+  padding: 0.5rem;
+}
+
+.searchBox {
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  flex: 1;
+  border: white;
+}
+
+.searchContainer {
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.searchBox:focus {
+  background-color: white;
+  outline: none !important;
+  border: 1px solid white;
+  box-shadow: 0 0 0;
+}
+
+input.searchBox {
+  border-color: white;
+}
+
+.table {
+  margin-top: 10px;
+}
+
+.table-title .btn {
+  float: right;
+  font-size: 15px;
+  border: none;
+  min-width: 50px;
+  border-radius: 2px;
+  border: none;
+  outline: none !important;
+  margin-left: 10px;
+}
+.table-title .btn:hover,
+.table-title .btn:focus {
+  color: #566787;
+  background: #f2f2f2;
+}
+.table-title .btn i {
+  float: left;
+  font-size: 20px;
+  margin-right: 5px;
+  margin-top: 2px;
+}
+.table-title .btn span {
+  float: left;
+  margin-top: 2px;
+}
+.table a.view {
+  color: #28a745;
+  margin-right: 3px;
+}
+.table a.edit {
+  color: #299be4;
+  margin-right: 3px;
+}
+.table a.delete {
+  color: red;
+}

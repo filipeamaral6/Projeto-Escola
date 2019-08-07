@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/tibco/Schemas/Office365AssignLicenses.xsd3"
+	 targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/Office365AssignLicenses.xsd3"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="addLicenses" maxOccurs="unbounded"/>
+				<xs:element ref="removeLicenses" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="addLicenses">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="disabledPlans" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="skuId" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="disabledPlans" type="xs:string"/>
+	<xs:element name="removeLicenses" type="xs:string"/>
+</xs:schema>

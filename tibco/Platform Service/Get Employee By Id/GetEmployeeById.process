@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1561632387170" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/User.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://www.tibco.com/schemas/tibco/Schemas/Employee.xsd" schemaLocation="/Schemas/Employee.xsd"/>
+    <wsdl:import namespace="http://xmlns.example.com/1561632387170" location="/User Service/WSDL.wsdl"/>
+    <pd:name>Platform Service/Get Employee By Id/GetEmployeeById.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <root>
+            <pfx2:InputData>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/ID">
+                    <xsl:attribute name="id">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/ID"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/EMAIL">
+                    <xsl:attribute name="email">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/EMAIL"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/PERSONAL_EMAIL">
+                    <xsl:attribute name="personalEmail">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/PERSONAL_EMAIL"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/FIRST_NAME">
+                    <xsl:attribute name="firstName">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/FIRST_NAME"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/LAST_NAME">
+                    <xsl:attribute name="lastName">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/LAST_NAME"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/USERNAME">
+                    <xsl:attribute name="username">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/USERNAME"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/CREATED_AT">
+                    <xsl:attribute name="createdAt">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/CREATED_AT"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/INTRANET">
+                    <xsl:attribute name="intranet">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/INTRANET"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/SLACK">
+                    <xsl:attribute name="slack">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/SLACK"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/OFFICE_365">
+                    <xsl:attribute name="office365">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/OFFICE_365"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/STARTED_AT">
+                    <xsl:attribute name="startedAt">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/STARTED_AT"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="$Select-Employee/resultSet/Record[1]/STATUS">
+                    <xsl:attribute name="status">
+                        <xsl:value-of select="$Select-Employee/resultSet/Record[1]/STATUS"/>
+                    </xsl:attribute>
+                </xsl:if>
+            </pfx2:InputData>
+        </root>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element ref="pfx2:InputData"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:endType>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1561635350679</pd:targetNamespace>
+    <pd:activity name="Select Employee">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>324</pd:x>
+        <pd:y>98</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/Database/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT  * FROM EMPLOYEES WHERE ID=(?)</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>ID</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ID</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>FIRST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>LAST_NAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>USERNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>INTRANET</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>SLACK</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-6</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>OFFICE_365</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-7</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>TINYINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>CREATED_AT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PERSONAL_EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STARTED_AT</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STATUS</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <ID>
+                    <xsl:value-of select="$Start/root/id"/>
+                </ID>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Select Employee</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Select Employee</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

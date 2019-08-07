@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>Welcome {{ currentUser.fullName }}!</h2>
+    <ng-container *ngIf="currentUser.authorities[0].authority === 'ROLE_USER'">
+      <p>You're logged in as User</p>
+    </ng-container>
+    <ng-container *ngIf="currentUser.authorities[0].authority === 'ROLE_ADMIN'">
+      <p>You're logged in as Admin</p>
+    </ng-container>
+  </div>
+  <div class="col-md-6">
+    <!-- <iframe
+      width="500"
+      height="355"
+      src="https://www.youtube.com/embed/B5OXW3li-6s"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe> -->
+  </div>
+</div>

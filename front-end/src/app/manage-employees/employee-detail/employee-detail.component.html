@@ -1,0 +1,391 @@
+<div class="container">
+  <div *ngIf="isLoading" style="text-align: center;">
+    <br />
+    <app-loading-spinner></app-loading-spinner>
+    <p *ngIf="isTakingAWhile">This may take a while</p>
+  </div>
+  <app-alert></app-alert>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h2 class="d-block" id="employeeTitle">
+                {{ employee.fullName }}
+              </h2>
+            </div>
+            <div class="col-md-6" id="buttonGrp">
+              <a
+                id="return"
+                title="Return"
+                data-toggle="tooltip"
+                [routerLink]="['/employees']"
+                style="cursor: pointer;"
+              >
+                <i class="material-icons">arrow_back</i>
+              </a>
+              <a
+                id="edit"
+                title="Edit Employee"
+                data-toggle="tooltip"
+                [routerLink]="['/employees/edit/', employee.id]"
+                style="cursor: pointer;"
+              >
+                <i class="material-icons">edit</i>
+              </a>
+              <a
+                id="refresh"
+                title="Refresh Employee"
+                data-toggle="tooltip"
+                (click)="fetchEmployeeById()"
+                style="cursor: pointer;"
+              >
+                <i class="material-icons">refresh</i>
+              </a>
+              <!--  <a
+                id="delete"
+                title="Delete"
+                data-toggle="tooltip"
+                (click)="onDeleteEmployee(employee.id, employee.firstName)"
+                style="cursor: pointer;"
+                *ngIf="
+                  currentUser.authorities[0].authority === 'ROLE_ADMIN' &&
+                  currentUser.username !== employee.username
+                "
+              >
+                <i class="material-icons">delete</i></a
+              > -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="basicInfo-tab"
+                    data-toggle="tab"
+                    href="#basicInfo"
+                    role="tab"
+                    aria-controls="basicInfo"
+                    aria-selected="true"
+                    >Basic Info</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="connectedServices-tab"
+                    data-toggle="tab"
+                    href="#connectedServices"
+                    role="tab"
+                    aria-controls="connectedServices"
+                    aria-selected="false"
+                    *ngIf="employee.status === 'ACTIVE'"
+                    >Platforms</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="administration-tab"
+                    data-toggle="tab"
+                    href="#administration"
+                    role="tab"
+                    aria-controls="administration"
+                    aria-selected="false"
+                    *ngIf="
+                      currentUser.authorities[0].authority === 'ROLE_ADMIN' &&
+                      currentUser.username !== employee.username
+                    "
+                    >Administration</a
+                  >
+                </li>
+              </ul>
+              <div class="tab-content ml-1" id="myTabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="basicInfo"
+                  role="tabpanel"
+                  aria-labelledby="basicInfo-tab"
+                >
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Full Name</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ employee.fullName }}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Personal Email</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ employee.personalEmail }}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-2 col-md-2 col-5">
+                      <label style="font-weight:bold;">Company Email</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ employee.email }}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Username</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ employee.username }}
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Start date</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ employee.startedAt.toString().slice(0, 10) }}
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Status</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ employee.status }}
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Created at</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ employee.createdAt.slice(0, 10) }}
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="connectedServices"
+                  role="tabpanel"
+                  aria-labelledby="ConnectedServices-tab"
+                >
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Intranet</label>
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="employee.intranet">
+                      Already invited
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="!employee.intranet">
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                        (click)="onIntranetInvite(employee)"
+                        *ngIf="isLoading === true"
+                        disabled
+                      >
+                        Invite
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                        (click)="onIntranetInvite(employee)"
+                        *ngIf="isLoading === false"
+                      >
+                        Invite
+                      </button>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Office 365</label>
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="employee.office365">
+                      Already invited
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="!employee.office365">
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm "
+                        (click)="onOffice365Invite(employee)"
+                        *ngIf="isLoading === true"
+                        disabled
+                      >
+                        Invite
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm "
+                        (click)="onOffice365Invite(employee)"
+                        *ngIf="isLoading === false"
+                      >
+                        Invite
+                      </button>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Slack</label>
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="employee.slack === 2">
+                      There was a problem with the Slack invite. Please invite
+                      manually.
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="employee.slack === 3">
+                      Slack invite is pending. This may take up to 5 minutes.
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="employee.slack === 1">
+                      Already invited
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="!employee.slack">
+                      <div *ngIf="!employee.office365 || !employee.intranet">
+                        Please send the Intranet and Office 365 invitation first
+                      </div>
+                      <div *ngIf="employee.office365 && employee.intranet">
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm "
+                          *ngIf="isLoading === true"
+                          (click)="onSlackInvite(employee.id)"
+                          disabled
+                        >
+                          Invite
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm "
+                          *ngIf="isLoading === false"
+                          (click)="onSlackInvite(employee.id)"
+                        >
+                          Invite
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <!--  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Office Vibe</label>
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="employee.officeVibe">
+                      Already invited
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="!employee.officeVibe">
+                      <div *ngIf="!employee.office365">
+                        Please send the Office 365 invitation first
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm "
+                        *ngIf="employee.office365"
+                      >
+                        Invite
+                      </button>
+                    </div>
+                  </div>
+                  <hr /> -->
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="administration"
+                  role="tabpanel"
+                  aria-labelledby="Administration-tab"
+                  *ngIf="currentUser.authorities[0].authority === 'ROLE_ADMIN'"
+                >
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">User role</label>
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="isUser">
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                        (click)="assignUserRole(employee)"
+                        *ngIf="employee.status === 'ACTIVE'"
+                      >
+                        Assign
+                      </button>
+                      <div *ngIf="employee.status === 'INACTIVE'">
+                        Employee needs to be active in order to assign the user
+                        role
+                      </div>
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="!isUser">
+                      Already assigned
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Status</label>
+                    </div>
+                    <div class="col-md-8 col-6" *ngIf="isActive">
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        (click)="
+                          onDeleteEmployee(employee.id, employee.firstName)
+                        "
+                        *ngIf="isLoading === true"
+                        disabled
+                      >
+                        Set Inactive
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        (click)="
+                          onDeleteEmployee(employee.id, employee.firstName)
+                        "
+                        *ngIf="isLoading === false"
+                      >
+                        Set Inactive
+                      </button>
+                    </div>
+
+                    <div class="col-md-8 col-6" *ngIf="!isActive">
+                      <button
+                        type="button"
+                        class="btn btn-success btn-sm"
+                        (click)="setActive(employee.id)"
+                        *ngIf="isLoading === true"
+                        disabled
+                      >
+                        Set Active
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-success btn-sm"
+                        (click)="setActive(employee.id)"
+                        *ngIf="isLoading === false"
+                      >
+                        Set Active
+                      </button>
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns5="http://www.tibco.com/schemas/tibco/Schemas/Office365.xsd2" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" xmlns:tns="http://xmlns.example.com/1562168510682" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:ns4="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Platforms.xsd" targetNamespace="http://xmlns.example.com/1562168510682">
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" location="../Schemas/IdOnly.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Platforms.xsd" location="../Schemas/Platforms.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" location="../Schemas/IntranetEmployee.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Office365.xsd2" location="../Schemas/Office365.xsd"/>
+    <message name="SlackInviteOutput">
+        <part name="output" element="ns3:OutputData"/>
+    </message>
+    <message name="SlackInviteInput">
+        <part name="input" element="ns2:InputData"/>
+    </message>
+    <message name="GetPlatformsByIdInput">
+        <part name="input" element="ns2:InputData"/>
+    </message>
+    <message name="GetPlatformsByIdOutput">
+        <part name="output" element="ns3:InputData"/>
+    </message>
+    <message name="OfficeVibeInviteInput">
+        <part name="input" element="ns2:InputData"/>
+    </message>
+    <message name="OfficeVibeInviteOutput">
+        <part name="output" element="ns3:OutputData"/>
+    </message>
+    <message name="IntranetInput">
+        <part name="input" element="ns:InputData"/>
+    </message>
+    <message name="IntranetOutput">
+        <part name="output" element="ns:OutputData"/>
+    </message>
+    <message name="Office365Input">
+        <part name="input" element="ns5:InputData"/>
+    </message>
+    <message name="Office365Output">
+        <part name="output" element="ns5:OutputData"/>
+    </message>
+    <portType name="SlackInvitePortType">
+        <operation name="SlackInvite">
+            <input message="tns:SlackInviteInput"/>
+            <output message="tns:SlackInviteOutput"/>
+        </operation>
+    </portType>
+    <portType name="GetPlatformsById">
+        <operation name="GetPlatformsById">
+            <input message="tns:GetPlatformsByIdInput"/>
+            <output message="tns:GetPlatformsByIdOutput"/>
+        </operation>
+    </portType>
+    <portType name="OfficeVibeInvitePortType">
+        <operation name="OfficeVibeInvite">
+            <input message="tns:OfficeVibeInviteInput"/>
+            <output message="tns:OfficeVibeInviteOutput"/>
+        </operation>
+    </portType>
+    <portType name="IntranetPortType">
+        <operation name="Intranet">
+            <input message="tns:IntranetInput"/>
+            <output message="tns:IntranetOutput"/>
+        </operation>
+    </portType>
+    <portType name="Office365PortType">
+        <operation name="Office365">
+            <input message="tns:Office365Input"/>
+            <output message="tns:Office365Output"/>
+        </operation>
+    </portType>
+</definitions>

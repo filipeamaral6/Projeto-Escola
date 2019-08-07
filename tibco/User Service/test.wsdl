@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1561632399090" xmlns:ns0="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" xmlns:ns1="http://www.tibco.com/schemas/tibco/Schemas/User.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd3" name="Untitled" targetNamespace="http://xmlns.example.com/1561632399090">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/IdOnly.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="InputData">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:InputData" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/UsernameOnly.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="InputData">
+                <xs:complexType>
+                    <xs:attribute name="username" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:InputData" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd3" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="InputData">
+                <xs:complexType>
+                    <xs:attribute name="code" type="xs:string"/>
+                    <xs:attribute name="username" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns3:InputData" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/User.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/User.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="InputData">
+                <xs:complexType>
+                    <xs:attribute name="createdAt" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="firstName" type="xs:string"/>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="lastName" type="xs:string"/>
+                    <xs:attribute name="password" type="xs:string"/>
+                    <xs:attribute name="passwordRecoveryCode" type="xs:string"/>
+                    <xs:attribute name="personalEmail" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                    <xs:attribute name="username" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OutputData">
+                <xs:complexType>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:InputData" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="ns1:OutputData" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="User Service">
+        <wsdl:port name="GetUserByIdPortTypeEndpoint1" binding="tns:GetUserByIdPortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8091/users/id"/>
+        </wsdl:port>
+        <wsdl:port name="AddUserPortTypeEndpoint1" binding="tns:AddUserPortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8091/users/add"/>
+        </wsdl:port>
+        <wsdl:port name="GetUserByUsernamePortTypeEndpoint1" binding="tns:GetUserByUsernamePortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8091/users/username"/>
+        </wsdl:port>
+        <wsdl:port name="UpdatePasswordRecoveryCodeEndpoint1" binding="tns:UpdatePasswordRecoveryCodeEndpoint1Binding">
+            <soap:address location="http://localhost:8091/password-reset"/>
+        </wsdl:port>
+        <wsdl:port name="DeleteUserPortTypeEndpoint1" binding="tns:DeleteUserPortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8091/users/delete"/>
+        </wsdl:port>
+        <wsdl:port name="UpdateUserPortTypeEndpoint1" binding="tns:UpdateUserPortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8091/users/update"/>
+        </wsdl:port>
+        <wsdl:port name="GetUsersPortTypeEndpoint1" binding="tns:GetUsersPortTypeEndpoint1Binding">
+            <soap:address location="http://localhost:8091/users"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="GetUserByIdPortType">
+        <wsdl:operation name="GetUserById">
+            <wsdl:input message="tns:GetUserByIdInput"/>
+            <wsdl:output message="tns:GetUserByIdOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="AddUserPortType">
+        <wsdl:operation name="AddUser">
+            <wsdl:input message="tns:AddUserInput"/>
+            <wsdl:output message="tns:AddUserOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="GetUserByUsernamePortType">
+        <wsdl:operation name="GetUserByUsername">
+            <wsdl:input message="tns:GetUserByUsernameInput"/>
+            <wsdl:output message="tns:GetUserByUsernameOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="UpdatePasswordRecoveryCode">
+        <wsdl:operation name="UpdatePasswordRecoveryCode">
+            <wsdl:input message="tns:UpdatePasswordRecoveryCodeInput"/>
+            <wsdl:output message="tns:UpdatePasswordRecoveryCodeOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="DeleteUserPortType">
+        <wsdl:operation name="DeleteUser">
+            <wsdl:input message="tns:DeleteUserInput"/>
+            <wsdl:output message="tns:DeleteUserOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="UpdateUserPortType">
+        <wsdl:operation name="UpdateUser">
+            <wsdl:input message="tns:UpdateUserInput"/>
+            <wsdl:output message="tns:UpdateUserOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="GetUsersPortType">
+        <wsdl:operation name="GetUsers">
+            <wsdl:input message="tns:GetUsersInput"/>
+            <wsdl:output message="tns:GetUsersOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GetUserByIdPortTypeEndpoint1Binding" type="tns:GetUserByIdPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetUserById">
+            <soap:operation style="document" soapAction="/UsersByIdSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="AddUserPortTypeEndpoint1Binding" type="tns:AddUserPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="AddUser">
+            <soap:operation style="document" soapAction="/UsersAddSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GetUserByUsernamePortTypeEndpoint1Binding" type="tns:GetUserByUsernamePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetUserByUsername">
+            <soap:operation style="document" soapAction="/UserByUsernameSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="UpdatePasswordRecoveryCodeEndpoint1Binding" type="tns:UpdatePasswordRecoveryCode">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="UpdatePasswordRecoveryCode">
+            <soap:operation style="document" soapAction="/UpdatePasswordRecoveryCodeSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="DeleteUserPortTypeEndpoint1Binding" type="tns:DeleteUserPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="DeleteUser">
+            <soap:operation style="document" soapAction="/UsersDeleteSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="UpdateUserPortTypeEndpoint1Binding" type="tns:UpdateUserPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="UpdateUser">
+            <soap:operation style="document" soapAction="/UserUpdateSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GetUsersPortTypeEndpoint1Binding" type="tns:GetUsersPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetUsers">
+            <soap:operation style="document" soapAction="/UsersSoapAction"/>
+            <wsdl:input>
+                <soap:body use="literal" parts=""/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="GetUserByIdInput">
+        <wsdl:part name="input" element="ns0:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="GetUserByIdOutput">
+        <wsdl:part name="output" element="ns1:root"/>
+    </wsdl:message>
+    <wsdl:message name="AddUserInput">
+        <wsdl:part name="input" element="ns1:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="AddUserOutput">
+        <wsdl:part name="output" element="ns1:OutputData"/>
+    </wsdl:message>
+    <wsdl:message name="GetUserByUsernameInput">
+        <wsdl:part name="input" element="ns2:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="GetUserByUsernameOutput">
+        <wsdl:part name="output" element="ns1:root"/>
+    </wsdl:message>
+    <wsdl:message name="UpdatePasswordRecoveryCodeInput">
+        <wsdl:part name="input" element="ns3:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="UpdatePasswordRecoveryCodeOutput">
+        <wsdl:part name="output" element="ns1:OutputData"/>
+    </wsdl:message>
+    <wsdl:message name="DeleteUserInput">
+        <wsdl:part name="input" element="ns0:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="DeleteUserOutput">
+        <wsdl:part name="output" element="ns1:OutputData"/>
+    </wsdl:message>
+    <wsdl:message name="UpdateUserInput">
+        <wsdl:part name="input" element="ns1:InputData"/>
+    </wsdl:message>
+    <wsdl:message name="UpdateUserOutput">
+        <wsdl:part name="output" element="ns1:OutputData"/>
+    </wsdl:message>
+    <wsdl:message name="GetUsersInput"/>
+    <wsdl:message name="GetUsersOutput">
+        <wsdl:part name="output" element="ns1:root"/>
+    </wsdl:message>
+</wsdl:definitions>

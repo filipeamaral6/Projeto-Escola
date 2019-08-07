@@ -1,0 +1,139 @@
+<div class="container">
+  <div *ngIf="isLoading" style="text-align: center;">
+    <br />
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <app-alert></app-alert>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h2 class="d-block" id="userTitle">
+                {{ user.fullName }}
+              </h2>
+            </div>
+            <div class="col-md-6" id="buttonGrp">
+              <a
+                id="return"
+                title="Return"
+                data-toggle="tooltip"
+                [routerLink]="['/users']"
+                style="cursor: pointer;"
+              >
+                <i class="material-icons">arrow_back</i>
+              </a>
+              <a
+                id="edit"
+                title="Edit User"
+                data-toggle="tooltip"
+                [routerLink]="['/users/edit/', user.id]"
+                style="cursor: pointer;"
+              >
+                <i class="material-icons">edit</i>
+              </a>
+              <a
+                id="delete"
+                title="Delete"
+                data-toggle="tooltip"
+                (click)="onDeleteUser(user.id, user.firstName, user.username)"
+                style="cursor: pointer;"
+                *ngIf="currentUser.username !== user.username"
+              >
+                <i class="material-icons">delete</i></a
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="basicInfo-tab"
+                    data-toggle="tab"
+                    href="#basicInfo"
+                    role="tab"
+                    aria-controls="basicInfo"
+                    aria-selected="true"
+                    >Basic Info</a
+                  >
+                </li>
+                <!-- <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      id="connectedServices-tab"
+                      data-toggle="tab"
+                      href="#connectedServices"
+                      role="tab"
+                      aria-controls="connectedServices"
+                      aria-selected="false"
+                      >Platforms</a
+                    >
+                  </li> -->
+              </ul>
+              <div class="tab-content ml-1" id="myTabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="basicInfo"
+                  role="tabpanel"
+                  aria-labelledby="basicInfo-tab"
+                >
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Full Name</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ user.fullName }}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Personal Email</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ user.personalEmail }}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-2 col-md-2 col-5">
+                      <label style="font-weight:bold;">Company Email</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ user.email }}
+                    </div>
+                  </div>
+                  <hr />
+
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Username</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ user.username }}
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3 col-md-2 col-5">
+                      <label style="font-weight:bold;">Created at</label>
+                    </div>
+                    <div class="col-md-8 col-6">
+                      {{ user.createdAt }}
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

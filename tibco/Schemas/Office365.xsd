@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/tibco/Schemas/Office365.xsd2"
+	 targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/Office365.xsd2"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="InputData" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="OutputData" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InputData">
+		<xs:complexType>
+			<xs:attribute name="token" type="xs:string"/>
+			<xs:attribute name="displayName" type="xs:string"/>
+			<xs:attribute name="mailNickname" type="xs:string"/>
+			<xs:attribute name="userPrincipalName" type="xs:string"/>
+			<xs:attribute name="password" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OutputData">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

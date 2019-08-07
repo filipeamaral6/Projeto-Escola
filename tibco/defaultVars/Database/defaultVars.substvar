@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>DatabaseURL</name>
+			<value>jdbc:mysql://localhost:3306/projetoescolapolarising</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1563537547520</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Password</name>
+			<value>#!oCpCOkkdXDppDjDOWzdf22irV+yqKq0O8mOebz4n/Ng=</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Password</type>
+			<modTime>1561477819770</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>User</name>
+			<value>root</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1561990378728</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>
